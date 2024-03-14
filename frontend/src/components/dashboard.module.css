@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .page {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .content {
+    width: calc(100% - 50px);
+    margin-left: auto;
+    padding: 15px;
+    height: 100%;
+    word-break: break-word;
+  }
+  .sidebar .sidebarposition span a {
+    text-decoration: none;
+    color: white;
+  }
+  
+  /* Alternatively, if you want to target the Link component directly */
+  .sidebar .sidebarposition span .link-text {
+    color: white;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    background-color: #090015;
+    transition: width 0.3s ease;
+    border-right: 1px #4d606e solid;
+    padding-top: 15px;
+  }
+  
+  .sidebar .sidebarposition {
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    text-align: left;
+  }
+  
+  .sidebar .sidebarposition:hover {
+    background-color: #3f5159;
+    /* border-right: 5px #e84a5f solid; */
+    border-right: 5px blueviolet; 
+  }
+  
+  .sidebar svg {
+    /* color: #e84a5f; */
+    color: blueviolet;
+    min-width: 25px;
+  }
+  
+  .sidebar  span {
+    width: 0;
+    height: 0;
+    padding: 0 15px;
+    transition: width 0.3s ease;
+    color: #c9c9c9;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sidebaropen {
+    width: 250px;
+    transition: width 0.3s ease;
+  }
+  
+  .sidebaropen .sidebarposition span {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .trigger {
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 12px 15px;
+  }
+  
