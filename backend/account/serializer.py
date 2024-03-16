@@ -31,3 +31,20 @@ class RegisterSerializer(serializers.Serializer):
         return validated_data
         
         print(validated_data)
+
+from rest_framework import serializers
+from django.contrib.auth.models import User
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email')
+
+
+# serializers.py
+from .models import Exoplanet
+
+class ExoplanetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exoplanet
+        fields = '__all__'

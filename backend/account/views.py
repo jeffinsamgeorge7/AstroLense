@@ -1,11 +1,19 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import LoginSerializer,RegisterSerializer
+from .serializer import LoginSerializer,RegisterSerializer,ExoplanetSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+
+# from rest_framework import viewsets
+# from rest_framework.parsers import MultiPartParser, FormParser
+# from .models import FitsFile
+
+# from astropy.io import fits
+# import matplotlib.pyplot as plt
+# import io
 
 
 class RegisterAPI(APIView):
@@ -51,13 +59,19 @@ class LoginAPI(APIView):
 
 
 
-@api_view(['POST'])
-def login(request):
-    data=request.data
-    serializer=LoginSerializer(data=data)
+# views.py
+from rest_framework import generics
+from .models import Exoplanet
 
-    if serializer.is_valid():
-        data=serializer.validated_data
-        return Response({'message':'sucess'})
-    
-    return Response(serializer.errors)
+class ExoplanetListCreate(generics.ListCreateAPIView):
+    queryset = Exoplanet.objects.all()
+    serializer_class = ExoplanetSerializer
+
+
+
+from django.http import JsonResponse
+
+
+def exoplanet_list(request):
+    exoplanets = Exoplanet.objects.all().values()  # Get all exoplanet data
+    return JsonResponse(list(exoplanets), safe=False)

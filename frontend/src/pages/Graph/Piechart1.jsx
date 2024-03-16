@@ -18,7 +18,7 @@ export const options = {
 export function Piechart1() {
   return (
     <Chart
-    style={{backgroundColor:"blueviolet"}}
+   
       chartType="PieChart"
       width="500px"
       height="400px"

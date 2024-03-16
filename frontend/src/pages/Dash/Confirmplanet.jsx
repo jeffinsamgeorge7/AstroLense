@@ -6,7 +6,6 @@ function createData(planet, host, stars, planets, method,year) {
   }
   
   const rows = [
-    createData('2MASS J19383260+4603591 b', '2MASS J19383260+4603591', 2, 3, 'Eclipse Timing Variations',2015),
     createData('KIC 10001893 b','KIC 10001893',1,3,'Orbital Brightness Modulation',2014),
     createData('KIC 10001893 c','KIC 10001893',1,3,'Orbital Brightness Modulation',2014),
     createData('KIC 10001893 d','KIC 10001893',1,3,'Orbital Brightness Modulation',2014),

@@ -5,8 +5,12 @@ import { Signin } from './pages/Signin'
 import { Signup } from './pages/Signup'
 import { Home } from './pages/Home'
 import Dashboard from './components/Dashboard'
-import { Confirmplanet } from './pages/Dash/Confirmplanet'
 import { Dash } from './pages/Dash/Dash'
+import { Confirmplanet } from './pages/Dash/Confirmplanet'
+import Exoplanetlist from './pages/Dash/Exoplanetlist'
+import Predicttab from './pages/Dash/Predicttab'
+
+
 
 export const Routing = () => {
   let element= useRoutes([
@@ -27,7 +31,12 @@ export const Routing = () => {
       element:<Dashboard/>,
       children:[
         {path:'/dashboard',element:<Dash/>},
-        {path:'/conflist',element:<Confirmplanet/>}
+        {path:'/conflist',element:<Confirmplanet/>},
+        {path:'/exolist',element:<Exoplanetlist/>},
+        {path:'/prediction',element:<Predicttab/>}
+       
+        
+        
       ]
     }
     ,

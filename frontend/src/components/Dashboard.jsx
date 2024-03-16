@@ -15,9 +15,14 @@ export default function Dashboard() {
   const handleTrigger = () => setIsOpen(!isOpen);
 
   return (
+    
     <div className={style.App}>
+        <div style={{maxWidth:'100%',height:'50px',backgroundColor:'blueviolet',color:'white',fontFamily:'sans-serif',fontSize:'30px',paddingRight:'82%'}}>
+            Astro Lense
+          </div>
       <div className={style.page}>
         <div className={style.content}>
+        
           <Outlet/>
         </div>
         <div className={`${style.sidebar} ${isOpen ? `${style.sidebaropen}` : ""}`}>
@@ -26,7 +31,7 @@ export default function Dashboard() {
           </div>
 
           <div className={style.sidebarposition}>
-         
+        
           <AccountBoxIcon/>
           <span>
            
@@ -38,13 +43,16 @@ export default function Dashboard() {
           <div className={style.sidebarposition}>
             <SettingsApplicationsIcon />
             <span>
-              <Link to='/conflist'>
+              <Link to='/exolist'>
               Confirm lists</Link>
               </span>
           </div>
           <div className={style.sidebarposition}>
             <TableChartIcon />
-            <span>Menu item 3</span>
+            <span>
+              <Link to='/prediction'>
+              Prediction</Link>
+              </span>
           </div>
 
           <div className={style.sidebarposition}>

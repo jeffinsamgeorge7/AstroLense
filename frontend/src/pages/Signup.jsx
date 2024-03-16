@@ -21,6 +21,7 @@ export const Signup = () => {
         password,
       });
       console.log(response.data);
+      alert("sucessfull")
       // Redirect or show success message
     } catch (err) {
       setError(err.response.data.message);
