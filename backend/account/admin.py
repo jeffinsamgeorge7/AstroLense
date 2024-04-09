@@ -8,3 +8,4 @@ admin.site.register(Author)
 
 admin.site.register(Person)
 admin.site.register(Exoplanet)
+

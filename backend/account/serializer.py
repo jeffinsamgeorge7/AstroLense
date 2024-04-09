@@ -48,3 +48,6 @@ class ExoplanetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exoplanet
         fields = '__all__'
+
+
+

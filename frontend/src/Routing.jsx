@@ -9,6 +9,13 @@ import { Dash } from './pages/Dash/Dash'
 import { Confirmplanet } from './pages/Dash/Confirmplanet'
 import Exoplanetlist from './pages/Dash/Exoplanetlist'
 import Predicttab from './pages/Dash/Predicttab'
+import Iman from './pages/Iman'
+import Exoml from './pages/Exoml'
+import UploadFITS from './pages/Uploadfits'
+import ExoplanetSearch from './pages/Fitsimg'
+import ApodViewer from './pages/Apodviewer'
+import SpaceWeatherDashboard from './pages/SpaceWeatherData'
+
 
 
 
@@ -33,7 +40,8 @@ export const Routing = () => {
         {path:'/dashboard',element:<Dash/>},
         {path:'/conflist',element:<Confirmplanet/>},
         {path:'/exolist',element:<Exoplanetlist/>},
-        {path:'/prediction',element:<Predicttab/>}
+        {path:'/prediction',element:<Exoml/>},
+        {path:'/apodapod',element:<ApodViewer/>},
        
         
         

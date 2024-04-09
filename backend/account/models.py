@@ -13,7 +13,6 @@ class Person(models.Model):
     
 
 # models.py
-from django.db import models
 
 class Exoplanet(models.Model):
     pl_name = models.CharField(max_length=100)
@@ -26,3 +25,7 @@ class Exoplanet(models.Model):
     def __str__(self): 
 
         return f'{self.pl_name }'
+    
+
+
+

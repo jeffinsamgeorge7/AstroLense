@@ -54,10 +54,12 @@ export default function Dashboard() {
               Prediction</Link>
               </span>
           </div>
+         
 
           <div className={style.sidebarposition}>
             <TableChartIcon />
-            <span>Position 4</span>
+            <span> <Link to='/apodapod'>
+              Event</Link></span>
           </div>
         </div>
       </div>
