@@ -33,7 +33,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import datas from '../assets/data.json';
 
-function Exoml() {
+function Exomlsvm() {
   const [koiName, setKeplerName] = useState('');
   const [prediction, setPrediction] = useState(null);
   console.log(datas);
@@ -54,7 +54,7 @@ function Exoml() {
 
   const handlePrediction = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/predict_exoplanet/?kepler_name=${koiName}`);
+      const response = await axios.get(`http://localhost:8000/api/predict_exoplanetsvm/?kepler_name=${koiName}`);
       const keplerName = getKeplerName(koiName);
       setPrediction(response.data.is_exoplanet ? `Exoplanet detected! Kepler name: ${keplerName}` : 'Not an exoplanet.');
     } catch (error) {
@@ -66,7 +66,7 @@ function Exoml() {
   return (
     <div>
       <h1>Exoplanet Detection</h1>
-      <h2>RandamForest Algorithm</h2>
+      <h2>Support Vector Machine Algorithm</h2>
       <input type="text" value={koiName} onChange={(e) => setKeplerName(e.target.value)} />
       <button onClick={handlePrediction}>Predict</button>
       {prediction && <p>{prediction}</p>}
@@ -74,4 +74,4 @@ function Exoml() {
   );
 }
 
-export default Exoml;
+export default Exomlsvm;
