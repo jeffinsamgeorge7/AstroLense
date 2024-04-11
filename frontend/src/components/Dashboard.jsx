@@ -6,6 +6,8 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import style from "../components/dashboard.module.css";
 import { Link,Outlet } from "react-router-dom";
+import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
+import LegendToggleIcon from '@mui/icons-material/LegendToggle';
 import {Dash} from '../pages/Dash/Dash'
 
 
@@ -17,8 +19,8 @@ export default function Dashboard() {
   return (
     
     <div className={style.App}>
-        <div style={{maxWidth:'100%',height:'50px',backgroundColor:'blueviolet',color:'white',fontFamily:'sans-serif',fontSize:'30px',paddingRight:'82%'}}>
-            Astro Lense
+        <div style={{maxWidth:'100%',height:'100px',backgroundColor:'blueviolet',color:'white',fontFamily:'sans-serif',fontSize:'30px',paddingRight:'82%'}}>
+            <h2 style={{paddingLeft:'50px',paddingTop:'20px'}}>Astro Lense</h2>
           </div>
       <div className={style.page}>
         <div className={style.content}>
@@ -48,7 +50,7 @@ export default function Dashboard() {
               </span>
           </div>
           <div className={style.sidebarposition}>
-            <TableChartIcon />
+            <OnlinePredictionIcon/>
             <span>
               <Link to='/prediction'>
               Prediction</Link>
@@ -57,7 +59,14 @@ export default function Dashboard() {
          
 
           <div className={style.sidebarposition}>
-            <TableChartIcon />
+          <LegendToggleIcon />
+            
+            <span> <Link to='/kepler'>
+              Light Curve</Link></span>
+          </div>
+
+          <div className={style.sidebarposition}>
+          <TableChartIcon />
             <span> <Link to='/apodapod'>
               Event</Link></span>
           </div>

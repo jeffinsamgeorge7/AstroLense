@@ -14,10 +14,10 @@ function ApodViewer() {
     }
 
     return (
-        <div>
+        <div style={{width:'1000px', alignItems:'center', marginLeft:'500px'}}>
             <h1>{apodData.title}</h1>
             <img src={apodData.url} alt={apodData.title} width='700px'height='400px' />
-            <p>{apodData.explanation}</p>
+            <h4>{apodData.explanation}</h4>
         </div>
     );
 }

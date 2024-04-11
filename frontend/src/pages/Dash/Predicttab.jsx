@@ -21,12 +21,10 @@ export default function Predicttab() {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="Algorithm 1" value="1" />
             <Tab label="Algorithm 2" value="2" />
-            <Tab label="Item Three" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1"><Exoml/></TabPanel>
         <TabPanel value="2"><Exomlsvm/></TabPanel>
-        <TabPanel value="3">Item Three</TabPanel>
       </TabContext>
     </Box>
   );

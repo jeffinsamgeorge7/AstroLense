@@ -32,6 +32,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import datas from '../assets/data.json';
+import { TextField } from '@mui/material';
+import Button from '@mui/joy/Button';
 
 function Exomlsvm() {
   const [koiName, setKeplerName] = useState('');
@@ -67,9 +69,21 @@ function Exomlsvm() {
     <div>
       <h1>Exoplanet Detection</h1>
       <h2>Support Vector Machine Algorithm</h2>
-      <input type="text" value={koiName} onChange={(e) => setKeplerName(e.target.value)} />
-      <button onClick={handlePrediction}>Predict</button>
-      {prediction && <p>{prediction}</p>}
+      <TextField
+          id="outlined-multiline-flexible"
+          label="KOI Name"
+          multiline
+          maxRows={4}
+          style={{height:'20px',paddingRight:'30px'}}
+          value={koiName} onChange={(e) => setKeplerName(e.target.value)} 
+        />
+      
+          
+          
+      <Button onClick={handlePrediction}    style={{height:'20px',paddingRight:'30px',width:'250px',height:'55px'}} >Predict</Button>
+      <br />
+    
+      {prediction && <h4>{prediction}</h4>}
     </div>
   );
 }

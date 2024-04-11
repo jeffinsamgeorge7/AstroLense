@@ -32,6 +32,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import datas from '../assets/data.json';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/joy/Button';
+
+
 
 function Exoml() {
   const [koiName, setKeplerName] = useState('');
@@ -66,10 +70,17 @@ function Exoml() {
   return (
     <div>
       <h1>Exoplanet Detection</h1>
-      <h2>RandamForest Algorithm</h2>
-      <input type="text" value={koiName} onChange={(e) => setKeplerName(e.target.value)} />
-      <button onClick={handlePrediction}>Predict</button>
-      {prediction && <p>{prediction}</p>}
+      <h2>Random Forest Algorithm</h2>
+      <TextField
+          id="outlined-multiline-flexible"
+          label="KOI Name"
+          multiline
+          maxRows={4}
+          style={{height:'20px',paddingRight:'30px'}}
+          value={koiName} onChange={(e) => setKeplerName(e.target.value)} 
+        />
+      <Button onClick={handlePrediction}    style={{height:'20px',paddingRight:'30px',width:'250px',height:'55px'}}  >Predict</Button>
+      {prediction && <h4>{prediction}</h4>}
     </div>
   );
 }
