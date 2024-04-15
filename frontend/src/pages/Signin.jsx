@@ -3,6 +3,8 @@ import FormControl from '@mui/joy/FormControl';
 import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
 import axios from 'axios';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
  // Import useHistory hook to redirect
 import style from './registration.module.css';
 import { useNavigate } from 'react-router-dom';
@@ -38,7 +40,8 @@ export const Signin = () => {
 
   return (
     <>
-      {error && <p>{error}</p>}
+  
+      {/* {error && <p>{error}</p>} */}
       <form onSubmit={handleSubmit} className={style.form}>
         <FormControl className={style.form1}>
           <Input
@@ -60,6 +63,10 @@ export const Signin = () => {
           Submit
         </Button>
       </form>
+      <Stack sx={{ width: '350px',paddingLeft:'70px' }} spacing={2}>
+      {error &&   <Alert severity="error">{error}.</Alert>}
+    </Stack>
+     
     </>
   );
 };

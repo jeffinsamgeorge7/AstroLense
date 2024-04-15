@@ -19,8 +19,8 @@ export default function Dashboard() {
   return (
     
     <div className={style.App}>
-        <div style={{maxWidth:'100%',height:'100px',backgroundColor:'blueviolet',color:'white',fontFamily:'sans-serif',fontSize:'30px',paddingRight:'82%'}}>
-            <h2 style={{paddingLeft:'50px',paddingTop:'20px'}}>Astro Lense</h2>
+        <div style={{width:'100%',height:'100px',backgroundColor:'blueviolet',color:'white',fontFamily:'sans-serif',fontSize:'25px',paddingRight:'82%'}}>
+            <h2 style={{paddingLeft:'50px',paddingTop:'10px'}}>Astro Lense</h2>
           </div>
       <div className={style.page}>
         <div className={style.content}>

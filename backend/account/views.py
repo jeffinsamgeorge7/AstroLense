@@ -16,14 +16,7 @@ import os
 from django.http import JsonResponse
 import requests
 
-
-# from rest_framework import viewsets
-# from rest_framework.parsers import MultiPartParser, FormParser
-# from .models import FitsFile
-
-# from astropy.io import fits
-# import matplotlib.pyplot as plt
-# import io
+from .models import User
 
 
 class RegisterAPI(APIView):
@@ -40,6 +33,31 @@ class RegisterAPI(APIView):
         serializer.save()
         
         return Response({'status':True,'message':'user created sucessfully'},status.HTTP_200_OK)
+
+# class RegisterAPI(APIView):
+#     def post(self, request):
+#         data = request.data
+#         serializer = RegisterSerializer(data=data)
+
+#         if not serializer.is_valid():
+#             return Response({
+#                 'status': False,
+#                 'message': serializer.errors
+#             }, status=status.HTTP_400_BAD_REQUEST)
+
+#         email = serializer.validated_data.get('email')
+#         if User.objects.filter(email=email).exists():
+#             return Response({
+#                 'status': False,
+#                 'message': 'Email already exists.'
+#             }, status=status.HTTP_400_BAD_REQUEST)
+
+#         serializer.save()
+
+#         return Response({
+#             'status': True,
+#             'message': 'User created successfully.'
+#         }, status=status.HTTP_201_CREATED)
         
 class LoginAPI(APIView):
     def post(self,request):
@@ -261,6 +279,10 @@ def apod(request):
 #             'folded_lightcurve_url': request.build_absolute_uri(folded_lightcurve_path),
 #         })
 
+
+
+
+
 from django.http import JsonResponse
 from django.views import View
 import matplotlib.pyplot as plt
@@ -300,18 +322,21 @@ class KeplerImageView(View):
         # Save the images
         plt.savefig(lightcurve_path)
         lightcurve_url = os.path.join('static', f'{kepler_name}_lightcurve.png')
-        # plt.savefig(periodogram_path)
-        # periodogram_url = os.path.join('static', f'{kepler_name}_periodogram.png')
-        # plt.savefig(folded_lightcurve_path)
+        plt.savefig(periodogram_path)
+        periodogram_url = os.path.join('static', f'{kepler_name}_periodogram.png')
+        plt.savefig(folded_lightcurve_path)
 
         # # URLs of the images
         
        
-        # folded_lightcurve_url = os.path.join('static', f'{kepler_name}_folded_lightcurve.png')
+        folded_lightcurve_url = os.path.join('static', f'{kepler_name}_folded_lightcurve.png')
 
         # Return the URLs of the images
         return JsonResponse({
             'lightcurve_url': lightcurve_url,
-            # 'periodogram_url': periodogram_url,
-            # 'folded_lightcurve_url': folded_lightcurve_url
+            'periodogram_url': periodogram_url,
+            'folded_lightcurve_url': folded_lightcurve_url
         })
+
+
+

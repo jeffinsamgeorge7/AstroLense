@@ -54,7 +54,7 @@ const Exoplanetlist = () => {
 
   return (
     <>
-     <h1>Confirmed exoplanet by kepler</h1>
+     <h1>Confirmed exoplanet Data</h1>
     <div style={{display:'flex',justifyContent:'center'}}>
     <div style={{ height: 700, width: '80%' }}>
       <DataGrid

@@ -23,7 +23,7 @@ function KeplerImage() {
           style={{height:'20px',paddingRight:'30px'}}
           value={keplerName} onChange={e => setKeplerName(e.target.value)} 
         />
-        <Button onClick={fetchImages}   style={{height:'20px',paddingRight:'30px',width:'250px',height:'55px'}} >Predict</Button>
+        <Button onClick={fetchImages}   style={{height:'20px',paddingRight:'30px',width:'250px',height:'55px'}} >Submit</Button>
 
             {imageUrls.lightcurve_url && <img src={imageUrls.lightcurve_url} alt="Lightcurve" width="200px" height='200px' />}
             {imageUrls.periodogram_url && <img src={imageUrls.periodogram_url} alt="Periodogram" width="200px" height='200px'  />}
