@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import LoginSerializer,RegisterSerializer,ExoplanetSerializer
+from .serializer import LoginSerializer,RegisterSerializer,ExoplanetSerializer,ImageUploadSerializer,FitsUploadSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from django.contrib.auth import authenticate
@@ -13,7 +13,7 @@ from astropy.io import fits
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponseNotFound
 import requests
 
 from .models import User
@@ -134,9 +134,7 @@ def predict_exoplanet(request):
 from sklearn.svm import SVC
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
-# clf = make_pipeline(StandardScaler(), SVC(gamma='auto'))
-# clf.fit(X_train, y_train)
-# y_pred = clf.predict(X_test)
+
 
 
 
@@ -235,53 +233,6 @@ def apod(request):
 
 
 
-# from django.http import JsonResponse
-# from django.views import View
-# import matplotlib.pyplot as plt
-# import lightkurve as lk
-# import numpy as np
-# import os
-
-# class KeplerImageView(View):
-#     def get(self, request, *args, **kwargs):
-#         kepler_name = request.GET.get('kepler_name')
-
-#         # Your existing code here...
-    
-#         search_result = lk.search_lightcurve(kepler_name , author='Kepler', cadence='long')
-
-#         lc_collection = search_result.download_all()
-
-#         lc = lc_collection.stitch().flatten(window_length=901).remove_outliers()
-#         lightcurve_path = os.path.join('static', f'{kepler_name}_lightcurve.png')
-
-
-#         period = np.linspace(1, 30, 10000)
-
-#         bls = lc.to_periodogram(method='bls', period=period, frequency_factor=500)
-#         periodogram_path = os.path.join('static', f'{kepler_name}_periodogram.png')
-#         planet_b_period = bls.period_at_max_power
-#         planet_b_t0 = bls.transit_time_at_max_power
-#         planet_b_dur = bls.duration_at_max_power
-
-#         ax = lc.fold(period=planet_b_period, epoch_time=planet_b_t0).scatter()
-#         ax.set_xlim(-5, 5)
-#         folded_lightcurve_path = os.path.join('static', f'{kepler_name}_folded_lightcurve.png')
-
-#         plt.savefig(lightcurve_path)
-#         plt.savefig(periodogram_path)
-#         plt.savefig(folded_lightcurve_path)
-
-#         # Return the URLs of the images
-#         return JsonResponse({
-#             'lightcurve_url': request.build_absolute_uri(lightcurve_path),
-#             'periodogram_url': request.build_absolute_uri(periodogram_path),
-#             'folded_lightcurve_url': request.build_absolute_uri(folded_lightcurve_path),
-#         })
-
-
-
-
 
 from django.http import JsonResponse
 from django.views import View
@@ -337,6 +288,177 @@ class KeplerImageView(View):
             'periodogram_url': periodogram_url,
             'folded_lightcurve_url': folded_lightcurve_url
         })
+
+
+# views.py
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+
+from .models import ImageUpload
+
+class ImageUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        image_serializer = ImageUploadSerializer(data=request.data)
+
+        if image_serializer.is_valid():
+            image_serializer.save()
+            return Response(image_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(image_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+# views.py
+# from rest_framework.parsers import MultiPartParser, FormParser
+# from rest_framework.response import Response
+# from rest_framework.views import APIView
+# from rest_framework import status
+
+# from .models import Fitsupload
+
+# class FitsFileUploadView(APIView):
+#     parser_classes = (MultiPartParser, FormParser)
+
+#     def post(self, request, *args, **kwargs):
+#         file_serializer = FitsUploadSerializer(data=request.data)
+
+#         if file_serializer.is_valid():
+#             file_serializer.save()
+#             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+#         else:
+#             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from .models import Fitsupload
+
+
+# Additional imports for plotting and saving image
+import lightkurve as lk
+import matplotlib.pyplot as plt
+import io
+
+# class FitsFileUploadView(APIView):
+#     parser_classes = (MultiPartParser, FormParser)
+
+#     def post(self, request, *args, **kwargs):
+#         file_serializer = FitsUploadSerializer(data=request.data)
+
+#         if file_serializer.is_valid():
+#             uploaded_file = request.FILES['file']
+#             print("Uploaded file name:", uploaded_file.name)
+#             file_serializer.save()
+#             # Generate plot
+#             lightcurve_path = os.path.join('media/fits', f'{uploaded_file.name}')
+#             lcf = lk.read('media/fits', f'{uploaded_file.name}')
+#             plots = lcf.plot()
+#             plt.savefig(plots)
+#             # Convert plot to image
+#             # img_bytes = io.BytesIO()
+#             # plt.savefig(img_bytes, format='png')
+#             # plt.savefig(lightcurve_path)
+#             # lightcurve = os.path.join('static', 'hello_lightcurve.png')
+#             # img_bytes.seek(0)
+
+#             # Save image to upload/images folder
+#             # filename = f"upload/images/{request.FILES['file'].name.replace('.fits', '.png')}"
+#             # with open(filename, 'wb') as f:
+#             #     f.write(img_bytes.read())
+
+#             return Response("hai", status=status.HTTP_201_CREATED)
+#         else:
+#             return Response("helllo", status=status.HTTP_400_BAD_REQUEST)
+
+
+# backend/views.py
+import lightkurve as lk
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
+from .models import Fitsupload
+import numpy as np
+
+class FitsFileUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        file_serializer = FitsUploadSerializer(data=request.data)
+        if file_serializer.is_valid():
+            fits_file = file_serializer.save()
+            # uploaded_file = request.FILES['file']
+            # print("Uploaded file name:", uploaded_file.name)
+            uploaded_file = request.FILES['file']
+            file_name, file_extension = os.path.splitext(uploaded_file.name)
+            print("Uploaded file name:", file_name)
+            
+            lcf = lk.read(fits_file.file.path)
+            lcp=lcf
+            ax = lcp.plot(column='sap_flux', normalize=True, label="SAP")
+            lcp.plot(ax=ax, column='pdcsap_flux', normalize=True, label="PDCSAP")
+            image_path1 = os.path.join( 'media',f'image1.png' ) 
+            plt.savefig(image_path1)
+
+            lc = lcf.flatten(window_length=901).remove_outliers()
+            lcc = lc.plot()
+
+            #lightcurve_url = os.path.join('static', f'{kepler_name}_lightcurve.png')
+            image_path2 = os.path.join( 'media',f'image2.png' ) 
+            plt.savefig(image_path2)
+            image_path = os.path.join('media' f'{file_name}_image.png' )
+            # Update the FITSupload instance with the image path
+            fits_file.image = image_path
+            fits_file.save()
+
+            period = np.linspace(1, 20, 10000)
+            # Create a BLSPeriodogram
+            bls = lc.to_periodogram(method='bls', period=period, frequency_factor=2500)
+            planet_b_period = bls.period_at_max_power
+            planet_b_t0 = bls.transit_time_at_max_power
+            planet_b_dur = bls.duration_at_max_power
+
+            ax = lc.fold(period=planet_b_period, epoch_time=planet_b_t0).scatter()
+        
+            lss =     ax.set_xlim(-5, 5)
+
+            #lightcurve_url = os.path.join('static', f'{kepler_name}_lightcurve.png')
+            image_path = os.path.join('media', f'image3.png' ) # Set the path where the image will be saved
+            plt.savefig(image_path)
+            fits_file.image = image_path
+            fits_file.save()
+            #return Response({'image': image_path}, content_type='image/png',status=status.HTTP_201_CREATED)
+            return Response('Sucess',status=status.HTTP_201_CREATED)
+            # if os.path.exists(image_path):
+            #     with open(image_path, 'rb') as f:
+            #         return HttpResponse(f.read(), content_type='image/png')
+            # return Response({'image': image_path}, content_type='image/png',status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    # def get(self, request, *args, **kwargs):
+    #     image_name = kwargs.get('image_name')
+    #     image_path = os.path.join( f'{image_name}.png')  # Assuming the image name is provided without extension
+    #     if os.path.exists(image_path):
+    #         with open(image_path, 'rb') as f:
+    #             return HttpResponse(f.read(), content_type='image/png')
+    #     else:
+    #         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
+ 
+
+        
+
+
+
+        
+     
+
 
 
 

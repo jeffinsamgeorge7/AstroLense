@@ -8,6 +8,7 @@ import style from "../components/dashboard.module.css";
 import { Link,Outlet } from "react-router-dom";
 import OnlinePredictionIcon from '@mui/icons-material/OnlinePrediction';
 import LegendToggleIcon from '@mui/icons-material/LegendToggle';
+import SatelliteAltIcon from '@mui/icons-material/SatelliteAlt';
 import {Dash} from '../pages/Dash/Dash'
 
 
@@ -61,7 +62,7 @@ export default function Dashboard() {
           <div className={style.sidebarposition}>
           <LegendToggleIcon />
             
-            <span> <Link to='/kepler'>
+            <span> <Link to='/nupload'>
               Light Curve</Link></span>
           </div>
 
@@ -70,6 +71,14 @@ export default function Dashboard() {
             <span> <Link to='/apodapod'>
               Event</Link></span>
           </div>
+
+
+          <div className={style.sidebarposition}>
+          <SatelliteAltIcon />
+            <span> <Link to='/skyview'>
+              Space Sky</Link></span>
+          </div>
+
         </div>
       </div>
     </div>

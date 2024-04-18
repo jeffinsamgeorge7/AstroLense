@@ -10,6 +10,7 @@ function App() {
     <BrowserRouter>
     <Routing/>
     
+     
     </BrowserRouter>
   
    
@@ -18,10 +19,4 @@ function App() {
 }
 
 export default App
- {/* <Account>
-          <Router>
-            <Route exact path="/" element={<Home/>} />
-            
-            <Route exact path="/signup" element={<Signup/>} />
-            </Router> 
-          </Account> */}
+ 

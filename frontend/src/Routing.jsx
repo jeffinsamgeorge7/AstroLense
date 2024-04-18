@@ -12,6 +12,9 @@ import Exoml from './pages/Exoml'
 import ApodViewer from './pages/Apodviewer'
 import Predicttab from './pages/Dash/Predicttab'
 import KeplerImage from './pages/Keplerimg'
+import ImageUpload from './pages/ImageUpload'
+import Fitsupload from './pages/Fitsupload'
+import ImageGenerator from './pages/Skyview'
 
 
 
@@ -39,10 +42,10 @@ export const Routing = () => {
         {path:'/exolist',element:<Exoplanetlist/>},
         {path:'/prediction',element:<Predicttab/>},
         {path:'/apodapod',element:<ApodViewer/>},
-        {path:'/kepler',element:<KeplerImage/>}
-       
-        
-        
+        {path:'/kepler',element:<KeplerImage/>},
+        {path:'/img',element:<ImageUpload/>},
+        {path:'/nupload',element:<Fitsupload/>},
+        {path:'skyview',element:<ImageGenerator/>},
       ]
     }
     ,

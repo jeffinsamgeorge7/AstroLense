@@ -39,3 +39,15 @@ class Exoplanet(models.Model):
 
 
 
+# models.py
+from django.db import models
+
+class ImageUpload(models.Model):
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='images/')
+
+
+
+class Fitsupload(models.Model):
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(upload_to='fits/')

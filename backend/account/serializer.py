@@ -51,3 +51,21 @@ class ExoplanetSerializer(serializers.ModelSerializer):
 
 
 
+# serializers.py
+from rest_framework import serializers
+from .models import ImageUpload
+
+class ImageUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageUpload
+        fields = '__all__'
+
+
+ # serializers.py
+from rest_framework import serializers
+from .models import Fitsupload
+
+class FitsUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Fitsupload
+        fields = '__all__'
