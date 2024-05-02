@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import style from './event.module.css'
 
 function ApodViewer() {
     const [apodData, setApodData] = useState(null);
@@ -14,10 +15,14 @@ function ApodViewer() {
     }
 
     return (
-        <div style={{width:'1000px', alignItems:'center', marginLeft:'500px'}}>
-            <h1>{apodData.title}</h1>
-            <img src={apodData.url} alt={apodData.title} width='700px'height='400px' />
-            <h4>{apodData.explanation}</h4>
+        <div className={style.main}>
+            <h1>Latest Astronomical event</h1>
+            <h2 >{apodData.title}</h2>
+            <div className={style.content}>
+            
+            <img src={apodData.url} alt={apodData.title} />
+            <p>{apodData.explanation}</p>
+            </div>
         </div>
     );
 }

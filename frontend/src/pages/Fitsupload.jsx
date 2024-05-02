@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { purple } from '@mui/material/colors';
 import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
-
+import style from './fits.module.css'
 const Fitsupload = () => {
   const [file, setFile] = useState(null);  
   const [imageUrl, setImageUrl] = useState(false);
@@ -87,22 +87,34 @@ const Fitsupload = () => {
       <button onClick={onFileUpload}>Upload!</button>
       {imageUrl && <img src={imageUrl} alt="Uploaded" />} */}
       <p>{responseText}</p>
-      {!loading && imageUrl && 
-        <div>
+      {!loading && imageUrl && <>
+        <div className={style.main}>
           <p>The Transiting Exoplanet Survey Satellite (TESS) is a NASA-sponsored Astrophysics Explorer-class mission that is performing a near all-sky survey to search for planets transiting nearby stars.</p>
            <p>
            Simple Aperture Photometry (SAP): The SAP light curve is calculated by summing together the brightness of pixels that fall within an aperture set by the TESS mission. This is often referred to as the optimal aperture, but in spite of its name, it can sometimes be improved upon! Because the SAP light curve is a sum of the brightness in chosen pixels, it is still subject to systematic artifacts of the mission.
            </p><p>
 Pre-search Data Conditioning SAP flux (PDCSAP) flux: SAP flux from which long term trends have been removed using so-called Co-trending Basis Vectors (CBVs). PDCSAP flux is usually cleaner data than the SAP flux and will have fewer systematic trends.
 </p>
+</div>
 
+<div>
          
           <img src={imageSrcs[0]} alt="From server 1" />
-          <h1>Flattening Lightkurve</h1>
-          <img src={imageSrcs[1]} alt="From server 2" />
-         <h1>Binning the light curve</h1>
-          <img src={imageSrcs[2]} alt="From server 3" />
+
+          <div className={style.content}>
+            <div>
+            <h1>Flattening Lightkurve</h1>
+                   <img src={imageSrcs[1]} alt="From server 2" />
+            </div>
+            <div>
+               
+            <h1>Binning the light curve</h1>
+                    <img src={imageSrcs[2]} alt="From server 3" />
+            </div>
         </div>
+        </div>
+      
+        </>
       }
     </div>
   );

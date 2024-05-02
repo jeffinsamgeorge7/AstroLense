@@ -1,0 +1,9 @@
+.main{
+    width: 80%;
+    text-align: center;
+}
+.main p{
+    font-family: "Mukta", sans-serif;
+    text-align: justify;
+    padding-left: 150px;
+}

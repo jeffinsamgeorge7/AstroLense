@@ -21,7 +21,7 @@ export function Piechart() {
     <Chart
     
       chartType="PieChart"
-      width="500px"
+      width="400px"
       height="400px"
       data={data}
       options={options}
