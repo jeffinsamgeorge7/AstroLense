@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
 import style from './account.module.css'
 import Image from '../assets/exo.png'
-import { Signin } from '../pages/Signin'
-import { Signup } from '../pages/Signup'
+import { Signin } from '../auth/Signin'
+import { Signup } from '../auth/Signup'
 import {Link,Outlet} from 'react-router-dom' 
 export const Authlayer  = () => {
   const[action,setAction] = useState('login')
@@ -33,9 +33,27 @@ export const Authlayer  = () => {
                 {/* signin */}
                 </span>
                 </p>
-}
-              <h2>Hello Again!</h2>
-              <p className={style.p1}>Welcome back you've been missed!</p>
+                }
+
+
+          {/* {action === 'login' ?
+
+
+          <>
+                <h2>Hello Again!</h2>
+                 <p className={style.p1}>Welcome back you've been missed!</p>
+                   </>
+                :
+
+            <>
+            <h1>hello</h1>
+            </>
+
+} */}
+                
+
+
+            
 <Outlet/>
 
 

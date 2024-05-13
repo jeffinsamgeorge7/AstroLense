@@ -34,55 +34,87 @@ class RegisterAPI(APIView):
         
         return Response({'status':True,'message':'user created sucessfully'},status.HTTP_200_OK)
 
-# class RegisterAPI(APIView):
-#     def post(self, request):
-#         data = request.data
-#         serializer = RegisterSerializer(data=data)
 
-#         if not serializer.is_valid():
-#             return Response({
-#                 'status': False,
-#                 'message': serializer.errors
-#             }, status=status.HTTP_400_BAD_REQUEST)
-
-#         email = serializer.validated_data.get('email')
-#         if User.objects.filter(email=email).exists():
-#             return Response({
-#                 'status': False,
-#                 'message': 'Email already exists.'
-#             }, status=status.HTTP_400_BAD_REQUEST)
-
-#         serializer.save()
-
-#         return Response({
-#             'status': True,
-#             'message': 'User created successfully.'
-#         }, status=status.HTTP_201_CREATED)
         
+# class LoginAPI(APIView):
+#     def post(self,request):
+#         data = request.data
+#         serializer =LoginSerializer(data=data)
+
+#         if  not serializer.is_valid():
+#             return Response({
+#                 'status':False,
+#                 'message':serializer.errors}
+#                 ,status.HTTP_400_BAD_REQUEST)
+        
+#         user=authenticate(username=serializer.data['username'],password=serializer.data['password'])
+#         if not user:
+#             return Response({
+#                 'status':False,
+#                 'message':'invalid credentials'}
+#                 ,status.HTTP_400_BAD_REQUEST)
+
+
+#         token , _ =Token.objects.get_or_create(user=user)
+#         print(token)
+
+#         return Response({'status':True,'message':'login sucessfull','token':str(token)},status.HTTP_200_OK)
+        
+import os
+from django.conf import settings
+
 class LoginAPI(APIView):
     def post(self,request):
         data = request.data
-        serializer =LoginSerializer(data=data)
+        serializer = LoginSerializer(data=data)
 
-        if  not serializer.is_valid():
+        if not serializer.is_valid():
             return Response({
-                'status':False,
-                'message':serializer.errors}
-                ,status.HTTP_400_BAD_REQUEST)
+                'status': False,
+                'message': serializer.errors}
+                , status.HTTP_400_BAD_REQUEST)
         
-        user=authenticate(username=serializer.data['username'],password=serializer.data['password'])
+        user = authenticate(username=serializer.data['username'], password=serializer.data['password'])
         if not user:
             return Response({
-                'status':False,
-                'message':'invalid credentials'}
-                ,status.HTTP_400_BAD_REQUEST)
+                'status': False,
+                'message': 'invalid credentials'}
+                , status.HTTP_400_BAD_REQUEST)
 
+        # Create a folder inside the media folder with the user's name
+        user_folder_path = os.path.join(settings.MEDIA_ROOT, user.username)
+        os.makedirs(user_folder_path, exist_ok=True)
 
-        token , _ =Token.objects.get_or_create(user=user)
+        token , _ = Token.objects.get_or_create(user=user)
         print(token)
 
-        return Response({'status':True,'message':'login sucessfull','token':str(token)},status.HTTP_200_OK)
-        
+        return Response({'status': True, 'message': 'login successful', 'token': str(token)}, status.HTTP_200_OK)
+
+#profile updation 
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+
+class UpdateUserAPI(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request):
+        user = request.user
+        data = request.data
+
+        if 'first_name' in data:
+            user.first_name = data['first_name']
+        if 'last_name' in data:
+            user.last_name = data['last_name']
+        if 'password' in data:
+            user.set_password(data['password'])
+
+        user.save()
+
+        return Response({'status': True, 'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
+
 
 
 # views.py

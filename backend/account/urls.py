@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import RegisterAPI,LoginAPI,ExoplanetListCreate,exoplanet_list,predict_exoplanet,apod,predict_exoplanetsvm,KeplerImageView,ImageUploadView,FitsFileUploadView
+from .views import RegisterAPI,LoginAPI,UpdateUserAPI,ExoplanetListCreate,exoplanet_list,predict_exoplanet,apod,predict_exoplanetsvm,KeplerImageView,ImageUploadView,FitsFileUploadView
 from rest_framework.routers import DefaultRouter
 from django.views.static import serve
 from django.conf import settings
@@ -7,6 +7,7 @@ from django.conf import settings
 urlpatterns = [
     path('login/', LoginAPI.as_view() ,name='login'),
     path('reg/',RegisterAPI.as_view(),name='register') ,
+    path('update-user/',UpdateUserAPI.as_view(),name='profileup') ,
     path('exoplanets/', ExoplanetListCreate.as_view(), name='exoplanet-list-create'),
     path('exoplanets/', exoplanet_list, name='exoplanet-list'),
     path('predict_exoplanet/',predict_exoplanet,name="dg"),

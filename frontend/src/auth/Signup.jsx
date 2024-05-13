@@ -43,6 +43,7 @@ export const Signup = () => {
       // Redirect or show success message
     } catch (err) {
       setError(err.response.data.message);
+      navigate('/')
       alert("Registration failed: " + err.response.data.message);
     }
   };

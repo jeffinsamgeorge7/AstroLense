@@ -9,6 +9,8 @@ class RegisterSerializer(serializers.Serializer):
     username=serializers.CharField(max_length=255)
     email=serializers.EmailField()
     password=serializers.CharField(max_length=255)
+    first_name=serializers.CharField(max_length=255)
+    last_name=serializers.CharField(max_length=255)
 
     def validate(self, data):
         if 'email' in data:
@@ -25,6 +27,8 @@ class RegisterSerializer(serializers.Serializer):
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
         )
         user.set_password(validated_data['password'])
         user.save()
