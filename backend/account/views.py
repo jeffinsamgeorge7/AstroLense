@@ -91,29 +91,6 @@ class LoginAPI(APIView):
         return Response({'status': True, 'message': 'login successful', 'token': str(token)}, status.HTTP_200_OK)
 
 #profile updation 
-from django.contrib.auth.models import User
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-
-class UpdateUserAPI(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def put(self, request):
-        user = request.user
-        data = request.data
-
-        if 'first_name' in data:
-            user.first_name = data['first_name']
-        if 'last_name' in data:
-            user.last_name = data['last_name']
-        if 'password' in data:
-            user.set_password(data['password'])
-
-        user.save()
-
-        return Response({'status': True, 'message': 'User details updated successfully'}, status=status.HTTP_200_OK)
 
 
 
@@ -344,25 +321,6 @@ class ImageUploadView(APIView):
 
 
 
-# views.py
-# from rest_framework.parsers import MultiPartParser, FormParser
-# from rest_framework.response import Response
-# from rest_framework.views import APIView
-# from rest_framework import status
-
-# from .models import Fitsupload
-
-# class FitsFileUploadView(APIView):
-#     parser_classes = (MultiPartParser, FormParser)
-
-#     def post(self, request, *args, **kwargs):
-#         file_serializer = FitsUploadSerializer(data=request.data)
-
-#         if file_serializer.is_valid():
-#             file_serializer.save()
-#             return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -372,41 +330,7 @@ from rest_framework import status
 from .models import Fitsupload
 
 
-# Additional imports for plotting and saving image
-import lightkurve as lk
-import matplotlib.pyplot as plt
-import io
 
-# class FitsFileUploadView(APIView):
-#     parser_classes = (MultiPartParser, FormParser)
-
-#     def post(self, request, *args, **kwargs):
-#         file_serializer = FitsUploadSerializer(data=request.data)
-
-#         if file_serializer.is_valid():
-#             uploaded_file = request.FILES['file']
-#             print("Uploaded file name:", uploaded_file.name)
-#             file_serializer.save()
-#             # Generate plot
-#             lightcurve_path = os.path.join('media/fits', f'{uploaded_file.name}')
-#             lcf = lk.read('media/fits', f'{uploaded_file.name}')
-#             plots = lcf.plot()
-#             plt.savefig(plots)
-#             # Convert plot to image
-#             # img_bytes = io.BytesIO()
-#             # plt.savefig(img_bytes, format='png')
-#             # plt.savefig(lightcurve_path)
-#             # lightcurve = os.path.join('static', 'hello_lightcurve.png')
-#             # img_bytes.seek(0)
-
-#             # Save image to upload/images folder
-#             # filename = f"upload/images/{request.FILES['file'].name.replace('.fits', '.png')}"
-#             # with open(filename, 'wb') as f:
-#             #     f.write(img_bytes.read())
-
-#             return Response("hai", status=status.HTTP_201_CREATED)
-#         else:
-#             return Response("helllo", status=status.HTTP_400_BAD_REQUEST)
 
 
 # backend/views.py
@@ -474,14 +398,6 @@ class FitsFileUploadView(APIView):
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    # def get(self, request, *args, **kwargs):
-    #     image_name = kwargs.get('image_name')
-    #     image_path = os.path.join( f'{image_name}.png')  # Assuming the image name is provided without extension
-    #     if os.path.exists(image_path):
-    #         with open(image_path, 'rb') as f:
-    #             return HttpResponse(f.read(), content_type='image/png')
-    #     else:
-    #         return HttpResponse(status=status.HTTP_404_NOT_FOUND)
  
 
         

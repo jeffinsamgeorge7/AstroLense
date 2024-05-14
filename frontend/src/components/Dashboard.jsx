@@ -91,11 +91,7 @@ export default function Dashboard() {
               Space Sky</Link></span>
           </div>
 
-          <div className={style.sidebarposition} onClick={handleTrigger}>
-          <SatelliteAltIcon />
-            <span> <Link to='/updateform'>
-              Update form</Link></span>
-          </div>
+         
 
           <div className={style.sidebarposition} onClick={handleLogout}>
                 <LogoutIcon />

@@ -16,7 +16,7 @@ import ImageUpload from './pages/ImageUpload'
 import Fitsupload from './pages/Fitsupload'
 import ImageGenerator from './pages/Skyview'
 import RegistrationForm from './auth/Registrationform'
-import UpdateUserForm from './auth/Updateform'
+
 
 
 
@@ -43,7 +43,6 @@ export const Routing = () => {
       children:[
         {path:'/dashboard',element:<Dash/>},
         {path:'/conflist',element:<Confirmplanet/>},
-        {path:'/updateform',element:<UpdateUserForm/>},
         {path:'/exolist',element:<Exoplanetlist/>},
         {path:'/prediction',element:<Predicttab/>},
         {path:'/apodapod',element:<ApodViewer/>},
