@@ -2,7 +2,6 @@ import React from 'react'
 import {useRoutes} from 'react-router-dom'
 import { Authlayer } from './components/Authlayer'
 import { Signin } from './auth/Signin'
-import { Signup } from './auth/Signup'
 import { Home } from './pages/Home'
 import Dashboard from './components/Dashboard'
 import { Dash } from './pages/Dash/Dash'
@@ -34,8 +33,7 @@ export const Routing = () => {
       element: <Authlayer/>,
       children:[
         {path:'/signin',element:<Signin/>},
-        {path:'/signup',element:<Signup/>},
-        {path:'/reg',element:<RegistrationForm/>}
+        {path:'/signup',element:<RegistrationForm/>}
 
       ]
     },{

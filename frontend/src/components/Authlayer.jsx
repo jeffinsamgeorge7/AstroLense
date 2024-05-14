@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import style from './account.module.css'
 import Image from '../assets/exo.png'
 import { Signin } from '../auth/Signin'
-import { Signup } from '../auth/Signup'
+
 import {Link,Outlet} from 'react-router-dom' 
 export const Authlayer  = () => {
   const[action,setAction] = useState('login')
@@ -36,7 +36,7 @@ export const Authlayer  = () => {
                 }
 
 
-          {/* {action === 'login' ?
+          {action === 'login' ?
 
 
           <>
@@ -46,10 +46,10 @@ export const Authlayer  = () => {
                 :
 
             <>
-            <h1>hello</h1>
+             <h2>Welcome!</h2>
             </>
 
-} */}
+}
                 
 
 

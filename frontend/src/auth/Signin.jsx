@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import FormControl from '@mui/joy/FormControl';
-import Button from '@mui/joy/Button';
+// import Button from '@mui/joy/Button';
 import Input from '@mui/joy/Input';
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
  // Import useHistory hook to redirect
+ import { Paper, TextInput, PasswordInput, Button, Text, Group } from '@mantine/core';
+
 import style from './registration.module.css';
 import { useNavigate } from 'react-router-dom';
 export const Signin = () => {
@@ -40,32 +42,35 @@ export const Signin = () => {
 
   return (
     <>
-  
-      {/* {error && <p>{error}</p>} */}
-      <form onSubmit={handleSubmit} className={style.form}>
-        <FormControl className={style.form1}>
-          <Input
-            placeholder="Username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </FormControl>
-        <FormControl className={style.form1}>
-          <Input
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <Button size="large" type="submit">
-          Submit
-        </Button>
-      </form>
-      <Stack sx={{ width: '350px',paddingLeft:'70px' }} spacing={2}>
-      {error &&   <Alert severity="error">{error}.</Alert>}
-    </Stack>
+    <Paper padding="md"  shadow="xs" style={{padding:'20px'}}>
+            <form onSubmit={handleSubmit}>
+                <div style={{ maxWidth: 400, margin: 'auto' }}>
+                    {/* <Text align="center" size="xl" weight={700}>Login</Text> */}
+                    <TextInput
+                        label="Username"
+                        placeholder="Enter your username"
+                        name="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                  />
+        
+                    <PasswordInput
+                        label="Password"
+                        placeholder="Enter your password"
+                        name="password"
+                        value={password}
+                         onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <Group position="apart" style={{paddingTop:'20px'}}>
+                        <Button type="submit">Submit</Button>
+                    </Group>
+                    {error &&   <Alert severity="error">{error}.</Alert>}
+                </div>
+            </form>
+            </Paper>
+      
      
     </>
   );
